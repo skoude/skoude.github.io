@@ -2,6 +2,12 @@
 published: false
 ---
 
+---
+layout: post
+title:  "Don't install OSX Yosemite Yet"
+date:   2015-04-13 16:13:25
+categories: osx yosemite mac
+---
 ## Don't install OSX Yosemite Yet
 
 I have been using yosemite since it was published and it has a lot of problems seriously. The biggest problem is the WLAN, that disconnects often. Even with the newest OSX Yosemite .3 updates it won’t fix the WLAN problems.   
