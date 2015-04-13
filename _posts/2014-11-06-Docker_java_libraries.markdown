@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Searching for good docker Java libraries
-date: {}
+date: {2014-11-06}
 categories: docker java
 published: true
 ---
