@@ -1,9 +1,8 @@
 ---
 layout: post
 title: Searching for good docker Java libraries
-date: {2014-11-06}
+date:   2014-11-06 16:13:25
 categories: docker java
-published: true
 ---
 
 I was looking for some Docker Java libraries to build some admin ui and integrations to my docker services, and these looks the most promising ones: 
