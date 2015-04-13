@@ -1,5 +1,8 @@
 ---
-published: true
+layout: post
+title:  "Don't install OSX Yosemite Yet"
+date:   2015-04-13 16:13:25
+categories: osx yosemite mac
 ---
 
 ## Don't install OSX Yosemite Yet
