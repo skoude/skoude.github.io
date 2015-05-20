@@ -21,7 +21,8 @@ categories: ansible openstack devops
 
 There are some prerequisites you need to take care of:
 
-* You need to have ansible installed
+* You need to have ansible and git installed
+* You need Mac or Linux. Sorry, this is not for Windows users. 
 * Openstack must be installed and you must have Tenant(Project) there([DevStack](http://docs.openstack.org/developer/devstack/) is also fine)
 * Know the Openstack API Endpoint url for Identity -service. From Dashboard goto `Access & Security` and `API Access` 
 * You need to know how to download openstack RC-file (more info [OpenstackRC documentation](http://docs.openstack.org/cli-reference/content/cli_openrc.html) )
