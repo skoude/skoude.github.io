@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Skoude&#39;s Blog</title>
+    <description>Technology blog focused mainly on Cloud, IAAS, Ansible, Java, Docker and Vaadin.
+</description>
+    <link>http://blog.skoude.com/</link>
+    <atom:link href="http://blog.skoude.com/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Wed, 20 May 2015 10:20:24 +0300</pubDate>
+    <lastBuildDate>Wed, 20 May 2015 10:20:24 +0300</lastBuildDate>
+    <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>Using Ansible to deploy Instances and services in openstack</title>
+        <description>&lt;p&gt;&lt;a href=&quot;http://www.ansible.com&quot;&gt;Ansible&lt;/a&gt; is a very powerfull platform to deploy and manage any kind of configuration on almost any platform available. It is a superb tool for Devops to automate service configuration and installations. Today I will show you a simple playbook that you can use to deploy instances on Openstack. This will get you started with Ansible and Openstack, and hopefully you will get some idea of how to extend the Ansible playbooks..&lt;/p&gt;
+
+&lt;h3 id=&quot;this-tutorial-will-show-you-how-to&quot;&gt;This tutorial will show you how to:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Upload image to Glance &lt;/li&gt;
+  &lt;li&gt;Deploy an Openstack instance of that image &lt;/li&gt;
+  &lt;li&gt;Modify the ssh settings so that root login is permitted &lt;/li&gt;
+  &lt;li&gt;Change the root password&lt;/li&gt;
+  &lt;li&gt;Restart the ssh -service on instance&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;getting-started&quot;&gt;Getting started&lt;/h3&gt;
+
+&lt;p&gt;There are some prerequisites you need to take care of:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You need to have ansible and git installed&lt;/li&gt;
+  &lt;li&gt;You need Mac or Linux. Sorry, this is not for Windows users. &lt;/li&gt;
+  &lt;li&gt;Openstack must be installed and you must have Tenant(Project) there(&lt;a href=&quot;http://docs.openstack.org/developer/devstack/&quot;&gt;DevStack&lt;/a&gt; is also fine)&lt;/li&gt;
+  &lt;li&gt;Know the Openstack API Endpoint url for Identity -service. From Dashboard goto &lt;code&gt;Access &amp;amp; Security&lt;/code&gt; and &lt;code&gt;API Access&lt;/code&gt; &lt;/li&gt;
+  &lt;li&gt;You need to know how to download openstack RC-file (more info &lt;a href=&quot;http://docs.openstack.org/cli-reference/content/cli_openrc.html&quot;&gt;OpenstackRC documentation&lt;/a&gt; )&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;First thing you have to do is that you have to have an ansible control server (your workstation is fine also), and as a best practice you should keep your ansible playbooks in a version control system like git or something similar. &lt;/p&gt;
+
+&lt;p&gt;To get you started first install Ansible.. Got to &lt;a href=&quot;www.ansible.com&quot;&gt;Ansible’s web site&lt;/a&gt; and go through the installation guide..
+On Ubuntu server you can just run
+&lt;code&gt;sudo apt-get install ansible&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;and on Mac you can install &lt;a href=&quot;http://brew.sh/&quot;&gt;Homebrew&lt;/a&gt; and run:
+&lt;code&gt;brew install ansible&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Then on linux or mac, create a  shh-keys (in this example it’s called cloud.key) and deploy that ssh-key on your Openstack tenant.. &lt;/p&gt;
+
+&lt;h2 id=&quot;generate-ssh-keys&quot;&gt;1. Generate ssh-keys&lt;/h2&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Kari-MacBook-Pro:~ skoude&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ssh-keygen -t rsa -f cloud.key
+Generating public/private rsa key pair.
+Enter passphrase &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;empty &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; no passphrase&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+Enter same passphrase again:
+passphrase too short: have &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt; bytes, need &amp;gt; 4
+Saving the key failed: cloud.key.
+Kari-MacBook-Pro:~ skoude&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ssh-keygen -t rsa -f cloud.key
+Generating public/private rsa key pair.
+Enter passphrase &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;empty &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; no passphrase&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+Enter same passphrase again:
+Your identification has been saved in cloud.key.
+Your public key has been saved in cloud.key.pub.
+The key fingerprint is:
+cc:e5:5e:b9:ab:fb:ef:56:65:e0:1f:ae:dd:68:8a:26 skoude@Kari-MacBook-Pro.local
+The key&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;s randomart image is:
++--&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; RSA 2048&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;----+
+&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;                 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;              .  &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;          .  . . &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;       o o   ...o&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;        S . o .oo&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;         . . . .o&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;          . . oo.&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;        E .. o+..&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;         o+++*o  &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
++-----------------+
+Kari-MacBook-Pro:~ skoude&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ls -la cloud*
+-rw-------  &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; skoude  staff  &lt;span class=&quot;m&quot;&gt;1675&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;18&lt;/span&gt; Tou 15:21 cloud.key
+-rw-r--r--  &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; skoude  staff   &lt;span class=&quot;m&quot;&gt;411&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;18&lt;/span&gt; Tou 15:21 cloud.key.pub
+Kari-MacBook-Pro:~ skoude&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;upload-your-key-to-openstack-tenant&quot;&gt;2. Upload your key to openstack tenant&lt;/h2&gt;
+
+&lt;p&gt;Now you need to upload your key to opentack tenant.. You can do it by issuing command:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;nova keypair-add --pub-key cloud.pub cloudkey&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;checkout-my-example-git--repo&quot;&gt;3. Checkout my example Git -repo&lt;/h2&gt;
+&lt;p&gt;When you have ssh-keys generated you could take a look at my ansible playbooks project on github. 
+just do:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git clone https://github.com/skoude/ansible_and_openstack.git&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;inspect-and-execute-code&quot;&gt;4. Inspect and execute code&lt;/h2&gt;
+&lt;p&gt;Now,  go to the &lt;code&gt;playbooks/create_openstack_instance.yaml&lt;/code&gt; and check &lt;code&gt;create_instance.yaml&lt;/code&gt;. This Yaml -file has comments, and so you should read it through first to understand what it’s doing. There is also &lt;code&gt;create_instance_by_using_env_values.yaml&lt;/code&gt;, which is executed if you wan’t to use openstack rc-files environmental variables, but then you need to run `source ./openrc.sh first&lt;/p&gt;
+
+&lt;p&gt;When you are done of inspecting the code, you can just execute &lt;code&gt;./run_create_instance.sh&lt;/code&gt; which asks you the key values and creates on instance in openstack for you. Basically it automatically uploads the Ubuntu 14.04 trusty image to glance and then boots up an instance from that image. Then it changes the ssh settings to allow root login, and changes the root password for what you inserted.  Look for the &lt;code&gt;create_instance.yaml&lt;/code&gt; for more details. It will also give floating IP for the instance and after running the playbook you should have new instance created on openstack and you can log in with the floating ip assigned. For example: &lt;code&gt;ssh root@172.20.0.40&lt;/code&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;final-conclusions&quot;&gt;5. Final conclusions&lt;/h2&gt;
+
+&lt;p&gt;When you are comfortable with this Ansible playbook, you could easily extend it to deploy multiple servers and services at one run. You could for example provision MongoDB, web servers, HAProxy, add the dns and add correct rules to firewall,  by issuing one command.  It would automatically create the whole cluster for you. Or you could use Ansible to deploy and manage the whole openstack infrastucture. It’s up to you what you wan’t to achieve by using tools like this.  &lt;a href=&quot;https://galaxy.ansible.com/&quot;&gt;Ansible Galaxy&lt;/a&gt; is a nice place to get started with ready made modules called &lt;em&gt;Roles&lt;/em&gt;. Also I would suggest you to read &lt;em&gt;Learning Ansible published by Packt Publishing&lt;/em&gt;  it’s really good book. &lt;/p&gt;
+
+&lt;p&gt;At next post I will show you how to use dynamic inventory against openstack. &lt;/p&gt;
+
+&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = &#39;skoudestechnologyblog&#39;;
+    
+    /* * * DON&#39;T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement(&#39;script&#39;); dsq.type = &#39;text/javascript&#39;; dsq.async = true;
+        dsq.src = &#39;//&#39; + disqus_shortname + &#39;.disqus.com/embed.js&#39;;
+        (document.getElementsByTagName(&#39;head&#39;)[0] || document.getElementsByTagName(&#39;body&#39;)[0]).appendChild(dsq);
+    })();
+&lt;/script&gt;
+
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot; rel=&quot;nofollow&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+
+</description>
+        <pubDate>Tue, 19 May 2015 19:13:25 +0300</pubDate>
+        <link>http://blog.skoude.com/ansible/openstack/devops/2015/05/19/Using-Ansible-to-deploy-instances.html</link>
+        <guid isPermaLink="true">http://blog.skoude.com/ansible/openstack/devops/2015/05/19/Using-Ansible-to-deploy-instances.html</guid>
+        
+        
+        <category>ansible</category>
+        
+        <category>openstack</category>
+        
+        <category>devops</category>
+        
+      </item>
+    
+  </channel>
+</rss>

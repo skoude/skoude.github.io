@@ -1,0 +1,484 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"login",
+				"login_password"
+			],
+			[
+				"opensta",
+				"openstack_auth_url"
+			],
+			[
+				"instan",
+				"instance_name"
+			],
+			[
+				"tenan",
+				"tenant_name"
+			],
+			[
+				"lo",
+				"login_password"
+			],
+			[
+				"logi",
+				"login_username"
+			],
+			[
+				"instance",
+				"instances"
+			],
+			[
+				"in",
+				"info"
+			],
+			[
+				"add",
+				"add_host"
+			],
+			[
+				"w",
+				"w3f8av8"
+			],
+			[
+				"skoude",
+				"skoude-project"
+			],
+			[
+				"insa",
+				"instance_name"
+			],
+			[
+				"inst",
+				"instance_name"
+			],
+			[
+				"intro",
+				"introductions"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "_config.yml",
+			"settings":
+			{
+				"buffer_size": 547,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "_layouts/default.html",
+			"settings":
+			{
+				"buffer_size": 248,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "_layouts/page.html",
+			"settings":
+			{
+				"buffer_size": 209,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "_layouts/post.html",
+			"settings":
+			{
+				"buffer_size": 373,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "_posts/2014-11-06-Docker_java_libraries.markdown",
+			"settings":
+			{
+				"buffer_size": 641,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 47.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/skoude/Documents/Coding/github_public/ansible_and_openstack/playbooks/create_openstack_instance/openstack_instances.sublime-project",
+		"/Users/skoude/Documents/Coding/openstack/openstack-ansible-playbooks/testing/openstack.yml",
+		"/Users/skoude/Documents/Coding/openstack/openstack-ansible-playbooks/testing/create_instance_and_use_ip.yaml",
+		"/Users/skoude/Documents/Coding/github_public/ansible_and_openstack/playbooks/create_instance.yaml",
+		"/Users/skoude/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/skoude/Google Drive/Työ/Coding/workforce_talend/connection_user.properties",
+		"/Users/skoude/Documents/Coding/openstack/parallax/playbooks/example/site.yml",
+		"/Users/skoude/Documents/Coding/openstack/parallax/playbooks/example/example_servers.yml",
+		"/Users/skoude/Documents/Coding/openstack/parallax/playbooks/example/repository_server.yml",
+		"/Users/skoude/tmp/Työntekijöiden_kulku_ovista.xlsx",
+		"/Volumes/PistonCloud/cloud.conf",
+		"/Users/skoude/openstack/cloud.conf",
+		"/Users/skoude/Documents/tmp/Confluence_system_info.txt",
+		"/Users/skoude/tmp/cards.json",
+		"/Users/skoude/tmp/172.16.0.24.txt",
+		"/Users/skoude/tmp/cmessages",
+		"/Users/skoude/tmp/172.16.0.24.log",
+		"/Users/skoude/Downloads/172.16.0.21_cmessages.txt",
+		"/Users/skoude/Documents/tmp/cmessages/cmessages",
+		"/Users/skoude/Downloads/172.16.0.19_cmessages.txt",
+		"/Users/skoude/Documents/tmp/cmessages/172.16.0.22_cmessages.txt",
+		"/Users/skoude/Documents/tmp/cmessages/172.16.0.23_cmessages.txt",
+		"/Users/skoude/Documents/tmp/cmessages/172.16.0.24_cmessages.txt",
+		"/Users/skoude/Documents/tmp/cmessages/172.16.0.25_cmessages.txt",
+		"/Users/skoude/tmp/172.16.0.22",
+		"/Users/skoude/Documents/tmp/cmessages/172.16.0.20_cmessages.txt",
+		"/Users/skoude/inSync Share/Projektit/Apprix_ja_visy/Apprix/kortit.json",
+		"/Users/skoude/inSync Share/Projektit/Apprix_ja_visy/Apprix/perehdytykset.json",
+		"/Users/skoude/inSync Share/Projektit/Apprix_ja_visy/Apprix/työnantajat_http_post.json",
+		"/Users/skoude/inSync Share/Projektit/Apprix_ja_visy/Apprix/työntekijät_http_post.json",
+		"/Users/skoude/inSync Share/Projektit/Apprix_ja_visy/Apprix/työntekijätjson.json",
+		"/Users/skoude/inSync Share/Projektit/Apprix_ja_visy/Visy/kortit.json",
+		"/Users/skoude/inSync Share/Projektit/Apprix_ja_visy/Visy/tyontekija_tyomaa_mappaykset.json",
+		"/Users/skoude/inSync Share/Projektit/Apprix_ja_visy/Visy/työmaalle_leimaukset.json",
+		"/Users/skoude/inSync Share/Projektit/Apprix_ja_visy/Visy/perehdytykset.json",
+		"/Users/skoude/Downloads/lahtienergia.fi_wildcard_certificate/lahtienergia.fi_private_key.key",
+		"/Users/skoude/Downloads/lahtienergia.fi_wildcard_certificate/lahtienergia.fi_private_key_in_RSA.key",
+		"/Users/skoude/Downloads/lahtienergia.fi_wildcard_certificate/pistoncloud/gdig2_sha2_intermediate_certificate.crt",
+		"/Users/skoude/Downloads/lahtienergia.fi_wildcard_certificate/lahtienergia.fi_certificate_reguest.csr",
+		"/Users/skoude/Downloads/t1vwkv1ymigi92t2y32onhahimcsabcy/2b28ce1209969b.crt",
+		"/Users/skoude/Downloads/t1vwkv1ymigi92t2y32onhahimcsabcy/gd_bundle-g2-g1.crt",
+		"/Users/skoude/Documents/Coding/workforce-base/pom.xml",
+		"/Users/skoude/Documents/Coding/workforce-base/src/main/resources/settings.xml"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"name",
+			".5",
+			"admin",
+			"mysql",
+			"certificate",
+			"ssl",
+			"172.16.0.20",
+			"scsi 0:0:0:0:",
+			"sd 1:0:1:0:",
+			"sd 1:0:1:0: ",
+			"unknown partition table",
+			"172.16.0.21",
+			"private_net",
+			"piston_n",
+			"piston_",
+			"piston",
+			"piston_net",
+			"certifi",
+			"ssl",
+			"range",
+			"private_svc",
+			"ntp",
+			"admin",
+			"bmc",
+			"ntp",
+			"172",
+			"172.17",
+			"dns",
+			"dhcp",
+			"switch netw",
+			"switch_netw",
+			"private_s",
+			"Cards",
+			"\"",
+			"”",
+			"user_profile_admin"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"Introductions",
+			"\""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "_config.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 547,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								484,
+								476
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/YAML/YAML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "_layouts/default.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 248,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "_layouts/page.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 209,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "_layouts/post.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 373,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "_posts/2014-11-06-Docker_java_libraries.markdown",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 641,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 100.0
+	},
+	"pinned_build_system": "",
+	"project": "jekyll.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
