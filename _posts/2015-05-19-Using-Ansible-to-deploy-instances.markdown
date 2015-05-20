@@ -30,7 +30,7 @@ There are some prerequisites you need to take care of:
 
 First thing you have to do is that you have to have an ansible control server (your workstation is fine also), and as a best practice you should keep your ansible playbooks in a version control system like git or something similar. 
 
-To get you started first install Ansible.. Got to [Ansible's web site](www.ansible.com) and go through the installation guide..
+To get you started first install Ansible.. Go to [Ansible's web site](www.ansible.com) and go through the installation guide..
 On Ubuntu server you can just run
 `sudo apt-get install ansible`
 
