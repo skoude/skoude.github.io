@@ -16,7 +16,15 @@ categories: ansible openstack devops
 *  Change the root password
 *  Restart the ssh -service on instance
 
-You could easily extend this playbook with modules to deploy for example mongodb, apache etc.. 
+
+### Getting started
+
+There are some prerequisites you need to take care of:
+
+* You need to have ansible installed
+* Openstack must be installed and you must have Tenant(Project) there([DevStack](http://docs.openstack.org/developer/devstack/) is also fine)
+* Know the Openstack API Endpoint url for Identity -service. From Dashboard goto `Access & Security` and `API Access` 
+* You need to know how to download openstack RC-file (more info [OpenstackRC documentation](http://docs.openstack.org/cli-reference/content/cli_openrc.html) )
 
 
 First thing you have to do is that you have to have an ansible control server (your workstation is fine also), and as a best practice you should keep your ansible playbooks in a version control system like git or something similar. 
@@ -87,28 +95,15 @@ git clone https://github.com/skoude/ansible_and_openstack.git
 ## 4. Inspect and execute code
 Now,  go to the `playbooks/create_openstack_instance.yaml` and check `create_instance.yaml`. This Yaml -file has comments, and so you should read it through first to understand what it's doing. There is also `create_instance_by_using_env_values.yaml`, which is executed if you wan't to use openstack rc-files environmental variables, but then you need to run `source ./openrc.sh first
 
-You may need to edit these parameters on `create_instance.yaml`:
+When you are done of inspecting the code, you can just execute `./run_create_instance.sh` which asks you the key values and creates on instance in openstack for you. Basically it automatically uploads the Ubuntu 14.04 trusty image to glance and then boots up an instance from that image. Then it changes the ssh settings to allow root login, and changes the root password for what you inserted.  Look for the `create_instance.yaml` for more details. It will also give floating IP for the instance and after running the playbook you should have new instance created on openstack and you can log in with the floating ip assigned. For example: `ssh root@172.20.0.40` 
 
-{% highlight yaml %}
-      # in here you must know the correct network id. If you are using neuton, you can just use:
-      # Kari-MacBook-Pro:skoude_test_project skoude$ neutron net-list
-      # +--------------------------------------+----------+-----------------------------------------------------+
-      # | id                                   | name     | subnets                                             |
-      # +--------------------------------------+----------+-----------------------------------------------------+
-      # | 7b4b47a4-93fe-42eb-8d3d-337430c4025f | internal | 6d427371-85fb-4dcb-b136-2394d20b5a27 172.20.0.0/20  |
-      # | 82ebf9e9-a103-4913-9c75-50c92906fc26 | external | 67721806-7b55-4fa9-b144-1149f5b2d810 172.20.16.0/20 |
-      # +--------------------------------------+----------+-----------------------------------------------------+
-      # Kari-MacBook-Pro:skoude_test_project skoude$
-      nics:
-        - net-id: 7b4b47a4-93fe-42eb-8d3d-337430c4025f
-{% endhighlight %}
 
-{% highlight yaml %}
-     # The id of the flavor:  nova flavor-list
-      flavor_id: 3
-        - net-id: 7b4b47a4-93fe-42eb-8d3d-337430c4025f
-{% endhighlight %}
-When you are done of inspecting the code, you can just execute `./run_create_instance.sh` which asks you the key values and creates on instance in openstack for you. Basically it automatically uploads the Ubuntu 14.04 trusty image to glance and then boots up an instance from that image. Then it changes the ssh settings to allow root login, and changes the root password for what you inserted.  Look for the `create_instance.yaml` for more details. 
+## 5. Final conclusions
+
+When you are comfortable with this Ansible playbook, you could easily extend it to deploy multiple servers and services at one run. You could for example provision MongoDB, web servers, HAProxy, add the dns and add correct rules to firewall,  by issuing one command.  It would automatically create the whole cluster for you. Or you could use Ansible to deploy and manage the whole openstack infrastucture. It's up to you what you wan't to achieve by using tools like this.  [Ansible Galaxy](https://galaxy.ansible.com/) is a nice place to get started with ready made modules called *Roles*. Also I would suggest you to read *Learning Ansible published by Packt Publishing*  it's really good book. 
+
+At next post I will show you how to use dynamic inventory against openstack. 
+
 
 
 {% if page.comments %}
