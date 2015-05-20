@@ -1,6 +1,6 @@
 # Site settings
 title: Skoude's Blog
-email: admin@skoude.com
+email: skoude@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Technology blog focused mainly on Cloud, IAAS, Ansible, Java, Docker and Vaadin.
 baseurl: "" # the subpath of your site, e.g. /blog/
