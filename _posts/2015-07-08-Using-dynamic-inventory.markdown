@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: Using dynamic inventory with openstack
+title: Using Ansible dynamic inventory with openstack
 date:   2015-07-06 21:13:25
 categories: ansible openstack devops
 ---
@@ -25,14 +25,16 @@ There are some prerequisites you need to take care of:
 *  Know the Openstack API Endpoint url for Identity -service. From Dashboard goto `Access & Security` and `API Access` 
 *  You need to know how to download openstack RC-file (more info [OpenstackRC documentation](http://docs.openstack.org/cli-reference/content/cli_openrc.html) )
 
-First thing you need to do is download the openstack.py -script and then
-edit the openstack.yml -file. 
+
+## Configuring and testing dynamic inventory
+
+First thing you need to do is to download the `openstack.py` -script and then
+edit the `openstack.yml` -file. 
 You can just clone the repo from [Dynamic inventory file for
   openstack](https://github.com/lukaspustina/dynamic-inventory-for-ansible-with-openstack)
 
-  Then edit the openstack.yml -file. Mine looks like this:
-
-{% highlight yml %}
+ openstack.yml:
+{% highlight bash%}
 clouds:
   devstack:
     auth:
@@ -50,7 +52,7 @@ Then you can just test it with executing
 
 
 
-Now just edit the `openstack.py` to look for the correct `openstack.yml`
+Edit the `openstack.py` to look for the correct `openstack.yml`
 -file. 
 
 {% highlight bash %}
@@ -66,10 +68,10 @@ vim openstack.py
 {% endhighlight %}
 
 
-This command should list all the instances that you have on your
-openstack tenant(=project)
 
-For example on my test openstack project:
+
+Now just test the dynamic inventory(it should list all your instances
+from the tenant you configured in openstack.yml):
 {% highlight bash %}
 ./openstack.py --list
 
@@ -100,9 +102,7 @@ instances running...)...
 {% endhighlight %}
 
 
-Now you can just use the inventory like
-nsible 
-
+Now, just use the inventory in ansible 
 {% highlight bash %}
 ansible -i openstack.py your_host -m service -a 'name=nginx state=restarted'
 
@@ -121,11 +121,9 @@ Create a directory called `inventory` and copy the
 `openstack.py`, `openstack.yml` and your normal inventory file (for
 example host) to this inventory directory.
 
-Now, because all of our inventories are on a sub folder called
+Because all of our inventories are on a sub-folder called
 `inventory` we can just point the ansible to use that directory as
-inventory file.
-
-For example just execute a command
+inventory file:
 
 {% highlight bash %}
 ansible -i inventory your_host -m service -a 'name=ssh state=restarted'
